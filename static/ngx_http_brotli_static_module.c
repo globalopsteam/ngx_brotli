@@ -248,6 +248,10 @@ static ngx_int_t handler(ngx_http_request_t* req) {
   req->gzip_tested = 1;
   req->gzip_ok = 0;
 
+  /* Prevent gzip from overriding */
+  req->gzip_tested = 1;
+  req->gzip_ok = 0;
+
   /* Prepare request push the body. */
   req->root_tested = !req->error_page;
   rc = ngx_http_discard_request_body(req);
